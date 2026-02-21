@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion AI</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    {% block content %}
+    {% endblock %}
+
+    <!-- Joke Toast Notification -->
+    <div id="joke-toast">
+        <div class="joke-toast-header">
+            <span class="joke-toast-icon">🎭</span>
+            <span class="joke-toast-title">EmotionAI says...</span>
+            <button class="joke-toast-close" onclick="closeJokeToast()">✕</button>
+        </div>
+        <div class="joke-toast-body" id="joke-toast-text"></div>
+    </div>
+
+    <!-- Music Recommendation Card -->
+    <div id="music-card">
+        <div class="music-card-header">
+            <span class="music-card-icon">🎵</span>
+            <span class="music-card-title" id="music-card-title">Songs for your mood</span>
+            <button class="music-card-close" onclick="closeMusicCard()">✕</button>
+        </div>
+        <ul class="music-song-list" id="music-song-list"></ul>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- Page-Specific Backgrounds -->
+    {% if request.endpoint == 'dashboard' %}
+    <!-- Dashboard: Pixel Trail + Heavy Blur -->
+    <canvas id="pixelCanvas"></canvas>
+    <div class="background-blur"></div>
+    <script src="{{ url_for('static', filename='js/pixel_trail.js') }}"></script>
+    {% elif request.endpoint == 'home' %}
+    <!-- Home: Orb Background + Light Blur -->
+    <div id="orb-container">
+        <div class="orb orb-1">
+            <div class="orb-inner"></div>
+        </div>
+        <div class="orb orb-2">
+            <div class="orb-inner"></div>
+        </div>
+        <div class="orb orb-3">
+            <div class="orb-inner"></div>
+        </div>
+    </div>
+    <div class="background-blur light"></div>
+    <script src="{{ url_for('static', filename='js/orb_bg.js') }}"></script>
+    {% else %}
+    <!-- Login/Other: Anti-Gravity -->
+    <canvas id="gravityCanvas"></canvas>
+    <script src="{{ url_for('static', filename='js/gravity_bg.js') }}"></script>
+    {% endif %}
+
+    <!-- Ghost Cursor (Everywhere) -->
+    <script src="{{ url_for('static', filename='js/ghost_cursor.js') }}"></script>
+</body>
+
+</html>

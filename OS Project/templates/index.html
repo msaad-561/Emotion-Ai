@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-icon">👁️</span> Emotion<span class="highlight">AI</span>
+    </div>
+    <nav>
+        <a href="{{ url_for('home') }}" class="active">Home</a>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </nav>
+    <div class="user-actions">
+        <div class="profile-container">
+            <button class="btn btn-secondary profile-btn" onclick="toggleProfile()">Profile ▾</button>
+            <div class="profile-dropdown hidden" id="profileDropdown">
+                <a href="#">My Account</a>
+                <a href="{{ url_for('logout') }}" class="danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="hero-section">
+    <div class="hero-content">
+        <div class="badge">AI Powered System</div>
+        <h1>
+            Understand Your <br>
+            <span class="text-gradient">True Emotions</span>
+        </h1>
+        <p class="subtitle">
+            A smart assistant that detects your mood and helps you stay balanced.
+            Detailed analytics, real-time feedback, and personalized care.
+        </p>
+
+        <div class="cta-group">
+            <button id="start-btn" class="btn btn-primary btn-glow">
+                Start Detection <span class="arrow">→</span>
+            </button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-glass">View Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="orbit-system">
+        <div class="orbit-circle c1"></div>
+        <div class="orbit-circle c2"></div>
+        <div class="floating-card glass" style="top: 20%; left: 10%;">
+            <span class="label">Status</span>
+            <span class="value">Active</span>
+        </div>
+        <div class="floating-card glass" style="bottom: 25%; right: 10%;">
+            <span class="label">Last Mood</span>
+            <span class="value">😊 Happy</span>
+        </div>
+    </div>
+</main>
+
+<section id="detection-overlay" class="hidden">
+    <!-- This will be the blur overlay when running -->
+    <div class="overlay-content split-layout">
+        <div class="camera-section">
+            <h2>Detecting...</h2>
+            <div class="camera-feed-placeholder">
+                <!-- Video feed will go here -->
+                <img id="video-feed" src="" alt="Camera Feed">
+            </div>
+            <button id="stop-btn" class="btn btn-danger">Stop</button>
+        </div>
+
+        <div class="stats-side-panel glass">
+            <h3>Current Mood</h3>
+            <div class="emoji-display" id="mood-emoji">😐</div>
+            <div class="dominant-mood" id="dominant-mood">Neutral</div>
+            <div class="mood-subtitle" id="mood-subtitle">Detecting...</div>
+
+            <div class="benefits-container hidden" id="benefits-container">
+                <div class="quick-reset-block">
+                    <h4>Quick Reset (10s):</h4>
+                    <p id="quick-reset-text" class="quick-reset-text"></p>
+                </div>
+
+                <!-- Benefits Block Removed as requested -->
+                <!-- 
+                <div class="benefits-block">
+                    <h4>Benefits:</h4>
+                    <p id="benefits-text" class="benefits-text"></p>
+                </div>
+                -->
+
+                <div id="joke-section" class="joke-section hidden">
+                    <span class="joke-icon">🎭</span> <span id="joke-text"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
