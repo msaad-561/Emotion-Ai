@@ -1,0 +1,11 @@
+{
+  "name": "emotion-aware-system",
+  "version": "1.0.0",
+  "description": "Emotion Aware System",
+  "scripts": {
+    "dev": "python app.py",
+    "start": "python app.py"
+  },
+  "author": "",
+  "license": "ISC"
+}
